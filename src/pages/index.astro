@@ -1,8 +1,18 @@
 ---
+import { db, eq, alias, Food, FoodTags, Tag, TagImplies } from "astro:db";
 import SiteLayout from "../layout/SiteLayout.astro";
+
+const impliedTags = alias(Tag, "impliedTags")
+const food = await db.select()
+  .from(Food)
+  .leftJoin(FoodTags, eq(FoodTags.foodid, Food.id))
+  .innerJoin(Tag, eq(FoodTags.tagid, Tag.id))
+  .leftJoin(TagImplies, eq(Tag.id, TagImplies.tagid))
+  .leftJoin(impliedTags, eq(TagImplies.impliestagid, impliedTags.id))
 ---
 <SiteLayout>
   <main class="container">
     <h1>Mise En Place</h1>
+    <pre>{JSON.stringify(food, null, 2)}</pre>
   </main>
 </SiteLayout>
