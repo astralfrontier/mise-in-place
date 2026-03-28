@@ -1,0 +1,29 @@
+---
+import AdminLayout from "../../../layout/AdminLayout.astro";
+import { queryByFood, combineFood } from "../../../food.ts"
+
+const foodQuery = await queryByFood();
+const food = combineFood(foodQuery);
+---
+<AdminLayout title="Manage Food">
+  <main class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Description</th>
+          <th>Tags</th>
+        </tr>
+      </thead>
+      <tbody>
+        {food.map((row: any) => 
+          <tr>
+            <td>{row.name}</td>
+            <td>{row.description}</td>
+            <td>{row.tags.map((tag: any) => tag.name).join(", ")}</td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </main>
+</AdminLayout>
