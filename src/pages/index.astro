@@ -10,9 +10,10 @@ const food = await db.select()
   .leftJoin(TagImplies, eq(Tag.id, TagImplies.tagid))
   .leftJoin(impliedTags, eq(TagImplies.impliestagid, impliedTags.id))
 ---
-<SiteLayout>
+<SiteLayout title="Home">
   <main class="container">
     <h1>Mise En Place</h1>
+    <a href="/admin">Admin</a>
     <pre>{JSON.stringify(food, null, 2)}</pre>
   </main>
 </SiteLayout>

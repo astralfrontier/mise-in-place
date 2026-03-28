@@ -1,5 +1,13 @@
 ---
+import SiteNavbar from "../components/SiteNavbar.astro";
 import "./SiteLayout.scss"
+
+interface Props {
+  title: string;
+  description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
 ---
 <html lang="en" data-theme="light">
 	<head>
@@ -7,10 +15,14 @@ import "./SiteLayout.scss"
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Mise En Place</title>
+		<title>{title} | Mise-en-place</title>
 	</head>
 	<body>
-		<slot />
+    <header class="container">
+      <SiteNavbar />
+    </header>
+    <main class="container">
+      <slot />
+    </main>
 	</body>
 </html>

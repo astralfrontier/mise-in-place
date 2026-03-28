@@ -1,0 +1,22 @@
+---
+import SiteLayout from "./SiteLayout.astro";
+import styles from "./AdminLayout.module.scss";
+import AdminSidebar from "../components/AdminSidebar.astro";
+
+interface Props {
+  title: string;
+  description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+---
+<SiteLayout title={title} description={description}>
+  <div class={styles.container}>
+    <div class={styles.sidebar}>
+      <AdminSidebar />
+    </div>
+    <div class={styles.body}>
+      <slot />
+    </div>
+  </div>
+</SiteLayout>
